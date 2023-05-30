@@ -2,30 +2,85 @@ import React, { Component } from 'react'
 import ContactForm from './ContactForm/ContactForm'
 import Filter from './Filter/Filter'
 import ContactList from './ContactList/ContactList'
-import { nanoid } from 'nanoid'
+import { nanoid } from 'nanoid';
 
 class App extends Component {
-state = {
-  contacts: [
-    {id: nanoid(), name: 'Rosie Simpson', number: '459-12-56'},
-    {id: nanoid(), name: 'Hermione Kline', number: '443-89-12'},
-    {id: nanoid(), name: 'Eden Clements', number: '645-17-79'},
-    {id: nanoid(), name: 'Annie Copeland', number: '227-91-26'},
-  ],
-  filter: '',
-  name: '',
-  number: ''
-}
-  render() {
-    console.log((this.state.contacts))
+  state = {
+    contacts: [],
+    name: '',
+    number: '',
+    filter: '',
+  }
+
+  handleNameChange = (e) => {
+    this.setState({ name: e.target.value });
+  }
+
+  handleNumberChange = (e) => {
+    this.setState({ number: e.target.value })
+  }
+  
+  handleFilterChange = (e) => {
+    this.setState({ filter: e.target.value });
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+    const { name, number, contacts } = this.state;
+    
+    if (contacts.some(contact => contact.name.toLowerCase() === name.toLowerCase())) {
+      alert(`${name} is already in contacts`);
+    }
+    else {
+      this.setState({
+        contacts: [...contacts, {
+          id: nanoid(),
+          name,
+          number
+        }
+        ]
+      })
+    }
+  };
+  handleSearch = e => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  };
+
+  filteredContacts = () => {
+    const { contacts, filter } = this.state;
+    if (filter === '') {
+      return contacts;
+    }
+    return contacts.filter(person => person.name.toLowerCase().includes(filter.toLowerCase()));
+  };
+  handleDelete = e => {
+    const { contacts } = this.state;
+    const newContacts = contacts.filter(person => person.id !== e.target.id);
+    this.setState({ contacts: newContacts });
+  };
+
+
+render() {  
+    
+    
     return (
-      <div>
-        <h1>Phonebook</h1>
-        <ContactForm />
+      <>
+        <h2>Phonebook</h2>
+        <ContactForm 
+          onFormSubmit={this.handleSubmit}
+          onNameChange={this.handleNameChange}
+          onNumberChange={this.handleNumberChange}
+        />
         <h2>Contacts</h2>
-        <Filter />
-        <ContactList />
-        </div>
+        <Filter 
+          onFilterChange={this.handleFilterChange}
+        />
+        <ContactList 
+          contacts={this.state.contacts}
+        /> 
+      </>
     )
   }
 }

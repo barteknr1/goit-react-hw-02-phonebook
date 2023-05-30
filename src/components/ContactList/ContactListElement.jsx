@@ -1,12 +1,18 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 
-const ContactListElement = props => {
-  return (
-    <div>ContactListElement</div>
-  )
+export class ContactListElement extends Component {
+
+
+  render() {
+
+    const { name, number } = this.props;
+    
+    return (
+      <div>{name}: {number}
+        <button type='button'>Delete</button>
+      </div>
+    )
+  }
 }
-
-ContactListElement.propTypes = {}
 
 export default ContactListElement

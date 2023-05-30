@@ -1,12 +1,20 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 
-const Filter = props => {
-  return (
-    <div>Filter</div>
-  )
+export class Filter extends Component {
+  render() {
+
+    const {onFilterChange} = this.props;
+
+    return (
+        <label>
+        <p>Find contacts by name</p>
+        <input onChange={onFilterChange}
+          type="text"
+          name="filter"
+        />
+        </label>
+    )
+  }
 }
-
-Filter.propTypes = {}
 
 export default Filter

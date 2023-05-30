@@ -1,13 +1,24 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import ContactListElement from './ContactListElement'
+import React, { Component } from 'react';
+import ContactListElement from './ContactListElement';
+import { nanoid } from 'nanoid';
 
-const ContactList = props => {
-  return (
-    <div>ContactList</div>
-  )
+export class ContactList extends Component {
+  render() {
+
+    const {contacts} = this.props;
+    return (
+        <ul>  
+        {contacts.map(contact =>
+          <li key={nanoid()}> 
+                <ContactListElement
+                name={contact.name}
+                number={contact.number}
+                />
+            </li>
+            )}        
+        </ul>
+    )
+  }
 }
-
-ContactList.propTypes = {}
 
 export default ContactList

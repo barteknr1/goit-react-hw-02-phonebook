@@ -1,40 +1,27 @@
-import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import css from './ContactForm.module.css'
-import { nanoid } from 'nanoid'
 
 export class ContactForm extends Component {
-    handleSubmit = evt => {
-        evt.preventDefault();
-
-        const form = evt.currentTarget;
-        const name = form.elements.name.value;
-        const phone = form.elements.phone.value;
-
-        console.log(name, phone);
-
-        this.props.onSubmit({ name, phone });
-        
-        form.reset();
-    }
-    
 
     render() {
+
+        const { onFormSubmit, onNameChange, onNumberChange } = this.props
+        
         return (
-            <form className={css.contactForm} onSubmit={this.handleSubmit}>
+            <form className={css.contactForm} onSubmit={onFormSubmit}>
                 <label>
                     <p>Name</p>
-                    <input
+                    <input onChange={onNameChange}
                         type="text"
                         name="name"
-                        pattern="^[a-zA-Z]+(([' -][a-zA-Z])?[a-zA-Z]*)*$"
+                        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
                         title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
                         required
                     />
                 </label>
                 <label>
                     <p>Number</p>
-                    <input
+                    <input onChange={onNumberChange}
                         type="tel"
                         name="number"
                         pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -48,10 +35,5 @@ export class ContactForm extends Component {
         )
   }
 }
-
-ContactForm.propTypes = {
-
-};
-
 
 export default ContactForm
