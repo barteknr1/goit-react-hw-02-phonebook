@@ -4,11 +4,11 @@ import css from './ContactList.module.css'
 class ContactListElement extends Component {
 
   render() {
-    const { name, number } = this.props;
+    const { name, number, handleDelete } = this.props;
 
     return (
       <div className={css.contactElement}>{name}: {number}
-        <button type='button'>Delete</button>
+        <button onClick={handleDelete} type='button'>Delete</button>
       </div>
     )
   }
