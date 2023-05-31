@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 
-export class Filter extends Component {
+class Filter extends Component {
   render() {
-
-    const {onFilterChange} = this.props;
-
+    const { onChange } = this.props;
     return (
         <label>
         <p>Find contacts by name</p>
-        <input onChange={onFilterChange}
+        <input onChange={onChange}
           type="text"
           name="filter"
         />

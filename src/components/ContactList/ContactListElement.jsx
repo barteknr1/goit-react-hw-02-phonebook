@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
+import css from './ContactList.module.css'
 
-export class ContactListElement extends Component {
-
+class ContactListElement extends Component {
 
   render() {
-
     const { name, number } = this.props;
-    
+
     return (
-      <div>{name}: {number}
+      <div className={css.contactElement}>{name}: {number}
         <button type='button'>Delete</button>
       </div>
     )
