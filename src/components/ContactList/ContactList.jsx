@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ContactListElement from './ContactListElement';
+import PropTypes from 'prop-types'
 
 class ContactList extends Component {
 
@@ -19,6 +20,15 @@ class ContactList extends Component {
       </ul>
     )
   }
+}
+
+ContactList.propTypes = {
+  contacts: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    number: PropTypes.string.isRequired
+  })),
+  onClick: PropTypes.func.isRequired,
 }
 
 export default ContactList
