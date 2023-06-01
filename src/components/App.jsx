@@ -6,19 +6,12 @@ import { nanoid } from 'nanoid';
 
 class App extends Component {
   state = {
-    contacts: [
-      { id: nanoid(), name: 'Rosie Simpson', number: '459-12-56' },
-      { id: nanoid(), name: 'Hermione Kline', number: '443-89-12' },
-      { id: nanoid(), name: 'Eden Clements', number: '645-17-79' },
-      { id: nanoid(), name: 'Annie Copeland', number: '227-91-26' },
-    ],
+    contacts: [],
     filter: '',
   }
 
   handleSubmit = (name, number) => {
-
     const { contacts } = this.state;
-    
     if (contacts.some(contact => contact.name.toLowerCase() === name.toLowerCase())) {
       alert(`${name} is already in contacts`);
     }
@@ -28,8 +21,7 @@ class App extends Component {
           id: nanoid(),
           name,
           number
-        }
-        ]
+        }]
       })
     }
   };
@@ -56,7 +48,7 @@ class App extends Component {
   render() {
   return (
     <>
-      <h2>Phonebook</h2>
+      <h1>Phonebook</h1>
       <ContactForm onSubmit={this.handleSubmit} />
       <h2>Contacts</h2>
       <Filter onChange={this.handleFilter} />
