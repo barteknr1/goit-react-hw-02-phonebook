@@ -9,7 +9,7 @@ class ContactListElement extends Component {
 
     return (
       <div className={css.contactElement}>{name}: {number}
-        <button className={css.delete} onClick={onClick} id={id} type='button'>Delete</button>
+        <button className={css.delete} onClick={() => onClick(id)} id={id} type='button'>Delete</button>
       </div>
     )
   }
